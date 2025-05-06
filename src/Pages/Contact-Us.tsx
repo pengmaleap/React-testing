@@ -5,7 +5,7 @@ import Form from '../components/form';
 function ContactUs() {
   return (
     <div>
-      <Navbar />
+     <Navbar/>
       <h1 className="text-2xl font-bold">Welcome to the ContactUs</h1>
       <Form/>
     </div>

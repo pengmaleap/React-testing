@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 const Home = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar/>
       <div className="flex flex-col items-center justify-center mt-10">
         <table className="border dark:border-gray-400 xl:w-screen lg:w-[800px] w-[400px]  text-center">
           {/* table header */}
