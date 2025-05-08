@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "./Card";
 import { BsPencil, BsTrash } from "react-icons/bs";
 
@@ -20,7 +20,31 @@ export const CardList = () => {
         "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=800&q=80",
     },
   ]);
+  interface User {
+    id: number;
+    username: string;
+    email: string;
+    address: {
+      city: string;
+    };
+  }
 
+  const [user, setUser] = useState<User[]>([]);
+
+  const fetchdata = async () => {
+    try {
+      const result = await fetch("https://jsonplaceholder.typicode.com/users");
+      const response = await result.json();
+      console.log("response:", response);
+      setUser(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchdata();
+  }, []);
   const addCard = (newCard) => {
     setCards([...cards, { ...newCard, id: Date.now() }]);
   };
@@ -36,14 +60,13 @@ export const CardList = () => {
   return (
      <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-        {cards.map((card) => (
+        {user.map((card) => (
           <div key={card.id} className="space-y-2">
             <Card
               id={card.id}
-              title={card.title}
-              description={card.description}
-              image={card.image}
-            />
+              city={card.address.city}
+              username={card}
+              email={card.email} title={undefined} />
             <div className="flex gap-2">
               {/* <button
                 onClick={() =>
